@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+
+  --color-kumon-blue: #0094da;
+  --color-kumon-ink: #111111;
+  --color-body-text: #4A5568;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-kumon-ink;
+    background-color: #63A9C6;
+    background-image: url('https://i.postimg.cc/gJHWfS5Z/155652ba3337c4338ade328e7b69b9ed.jpg');
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-size: 800px;
+    background-repeat: repeat;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+}
