@@ -55,6 +55,7 @@ export default function TeamShowcase() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [placeholderHovered, setPlaceholderHovered] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const profileRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -62,6 +63,14 @@ export default function TeamShowcase() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  React.useEffect(() => {
+    if (isMobile && hoveredId !== null) {
+      setTimeout(() => {
+        profileRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [hoveredId, isMobile]);
 
   const whatsappLink = `https://wa.me/+60124362984?text=${encodeURIComponent("Hi! I Would like to apply as a teacher!")}`;
 
@@ -121,68 +130,69 @@ export default function TeamShowcase() {
               <PlaceholderCard onHover={() => setPlaceholderHovered(4)} onLeave={() => setPlaceholderHovered(null)} />
               <PlaceholderCard onHover={() => setPlaceholderHovered(5)} onLeave={() => setPlaceholderHovered(null)} />
             </div>
-
-            {/* Floating Profile Card */}
-            <AnimatePresence>
-              {hoveredId !== null && teachers[hoveredId] && !teachers[hoveredId].isPlaceholder && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                  className={cn(
-                    "z-50 bg-white rounded-[24px] md:rounded-[40px] p-5 md:p-8 shadow-2xl border border-gray-100",
-                    isMobile 
-                      ? "absolute top-0 left-0 w-full h-full flex flex-col justify-center bg-white/95 backdrop-blur-sm" 
-                      : cn(
-                          "absolute w-[450px] max-w-[90vw] pointer-events-none",
-                          hoveredId === 0 ? "top-[180px] left-0" : "top-[280px] left-[100px]"
-                        )
-                  )}
-                >
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setHoveredId(null);
-                    }}
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shadow-sm active:scale-95 transition-transform"
-                  >
-                    <X size={20} />
-                  </button>
-                  <span className="text-[10px] font-bold text-kumon-blue uppercase tracking-[0.2em] mb-2 block">
-                    INSTRUCTOR PROFILE
-                  </span>
-                  <h3 className="text-2xl font-display font-bold text-[#111111] mb-1">
-                    {teachers[hoveredId].name}
-                  </h3>
-                  <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-4 md:mb-6">
-                    {teachers[hoveredId].role}
-                  </p>
-                  <div className="h-[1px] bg-gray-100 w-full mb-4 md:mb-6" />
-                  <p className="text-sm md:text-base text-body-text leading-relaxed italic">
-                    {teachers[hoveredId].bio}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Placeholder Hover Card */}
-            <AnimatePresence>
-              {placeholderHovered !== null && !isMobile && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="absolute z-50 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 pointer-events-none font-bold text-kumon-blue uppercase tracking-widest text-xs"
-                  style={{
-                    top: placeholderHovered === 2 ? '350px' : placeholderHovered === 3 ? '450px' : placeholderHovered === 4 ? '100px' : '300px',
-                    left: placeholderHovered === 2 ? '0' : placeholderHovered === 3 ? '200px' : placeholderHovered === 4 ? '400px' : '400px'
-                  }}
-                >
-                  Come teach with us!
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
+
+          {/* Floating Profile Card */}
+          <AnimatePresence>
+            {hoveredId !== null && teachers[hoveredId] && !teachers[hoveredId].isPlaceholder && (
+              <motion.div
+                ref={profileRef}
+                initial={isMobile ? { opacity: 0, y: 20 } : { opacity: 0, scale: 0.9, y: 10 }}
+                animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
+                exit={isMobile ? { opacity: 0, y: 20 } : { opacity: 0, scale: 0.9, y: 10 }}
+                className={cn(
+                  "z-50 bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-8 shadow-2xl border border-gray-100",
+                  isMobile 
+                    ? "relative mt-8 w-full border-t-4 border-t-kumon-blue" 
+                    : cn(
+                        "absolute w-[450px] max-w-[90vw] pointer-events-none",
+                        hoveredId === 0 ? "top-[180px] left-0" : "top-[280px] left-[100px]"
+                      )
+                )}
+              >
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setHoveredId(null);
+                  }}
+                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shadow-sm active:scale-95 transition-transform"
+                >
+                  <X size={20} />
+                </button>
+                <span className="text-[10px] font-bold text-kumon-blue uppercase tracking-[0.2em] mb-2 block">
+                  INSTRUCTOR PROFILE
+                </span>
+                <h3 className="text-2xl font-display font-bold text-[#111111] mb-1">
+                  {teachers[hoveredId].name}
+                </h3>
+                <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-4 md:mb-6">
+                  {teachers[hoveredId].role}
+                </p>
+                <div className="h-[1px] bg-gray-100 w-full mb-4 md:mb-6" />
+                <p className="text-sm md:text-base text-body-text leading-relaxed italic">
+                  {teachers[hoveredId].bio}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Placeholder Hover Card */}
+          <AnimatePresence>
+            {placeholderHovered !== null && !isMobile && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="absolute z-50 bg-white rounded-2xl p-4 shadow-xl border border-gray-100 pointer-events-none font-bold text-kumon-blue uppercase tracking-widest text-xs"
+                style={{
+                  top: placeholderHovered === 2 ? '350px' : placeholderHovered === 3 ? '450px' : placeholderHovered === 4 ? '100px' : '300px',
+                  left: placeholderHovered === 2 ? '0' : placeholderHovered === 3 ? '200px' : placeholderHovered === 4 ? '400px' : '400px'
+                }}
+              >
+                Come teach with us!
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Right Side: List */}
