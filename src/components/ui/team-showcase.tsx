@@ -98,56 +98,79 @@ export default function TeamShowcase() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 relative">
-            {/* Column 1 */}
-            <div className="space-y-4 md:space-y-6">
-              <TeacherPhoto 
-                teacher={teachers[0]} 
-                isHovered={hoveredId === 0} 
-                anyHovered={hoveredId !== null}
-                onHover={() => setHoveredId(0)}
-                onLeave={() => setHoveredId(null)}
-                onClick={() => isMobile && setHoveredId(hoveredId === 0 ? null : 0)}
-              />
-              <PlaceholderCard onHover={() => setPlaceholderHovered(2)} onLeave={() => setPlaceholderHovered(null)} />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 relative">
+            {teachers.map((teacher, index) => (
+              <React.Fragment key={teacher.id}>
+                <div className={cn(
+                  "space-y-4 md:space-y-6",
+                  index === 1 && "md:pt-12", // Sir Ahmad shift on desktop only
+                )}>
+                  {!teacher.isPlaceholder ? (
+                    <TeacherPhoto 
+                      teacher={teacher} 
+                      isHovered={hoveredId === teacher.id} 
+                      anyHovered={hoveredId !== null}
+                      onHover={() => !isMobile && setHoveredId(teacher.id)}
+                      onLeave={() => !isMobile && setHoveredId(null)}
+                      onClick={() => isMobile && setHoveredId(hoveredId === teacher.id ? null : teacher.id)}
+                    />
+                  ) : (
+                    <PlaceholderCard 
+                      onHover={() => setPlaceholderHovered(teacher.id)} 
+                      onLeave={() => setPlaceholderHovered(null)} 
+                    />
+                  )}
+                </div>
 
-            {/* Column 2 - Shifted Down */}
-            <div className="space-y-4 md:space-y-6 pt-8 md:pt-12">
-              <TeacherPhoto 
-                teacher={teachers[1]} 
-                isHovered={hoveredId === 1} 
-                anyHovered={hoveredId !== null}
-                onHover={() => setHoveredId(1)}
-                onLeave={() => setHoveredId(null)}
-                onClick={() => isMobile && setHoveredId(hoveredId === 1 ? null : 1)}
-              />
-              <PlaceholderCard onHover={() => setPlaceholderHovered(3)} onLeave={() => setPlaceholderHovered(null)} />
-            </div>
-
-            {/* Column 3 - Stacks on mobile if needed, but grid-cols-2 handles it */}
-            <div className="space-y-4 md:space-y-6 md:pt-0 pt-0">
-              <PlaceholderCard onHover={() => setPlaceholderHovered(4)} onLeave={() => setPlaceholderHovered(null)} />
-              <PlaceholderCard onHover={() => setPlaceholderHovered(5)} onLeave={() => setPlaceholderHovered(null)} />
-            </div>
+                {/* Mobile Description - Inserted after the clicked photo */}
+                <AnimatePresence>
+                  {isMobile && hoveredId === teacher.id && !teacher.isPlaceholder && (
+                    <motion.div
+                      ref={profileRef}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="relative mt-4 w-full bg-white rounded-[24px] p-6 shadow-xl border-l-4 border-l-kumon-blue overflow-hidden"
+                    >
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHoveredId(null);
+                        }}
+                        className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500"
+                      >
+                        <X size={16} />
+                      </button>
+                      <span className="text-[10px] font-bold text-kumon-blue uppercase tracking-[0.2em] mb-2 block">
+                        INSTRUCTOR PROFILE
+                      </span>
+                      <h3 className="text-xl font-display font-bold text-[#111111] mb-1">
+                        {teacher.name}
+                      </h3>
+                      <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-4">
+                        {teacher.role}
+                      </p>
+                      <div className="h-[1px] bg-gray-100 w-full mb-4" />
+                      <p className="text-sm text-body-text leading-relaxed italic">
+                        {teacher.bio}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </React.Fragment>
+            ))}
           </div>
 
-          {/* Floating Profile Card */}
+          {/* Floating Profile Card (Desktop Only) */}
           <AnimatePresence>
-            {hoveredId !== null && teachers[hoveredId] && !teachers[hoveredId].isPlaceholder && (
+            {!isMobile && hoveredId !== null && teachers[hoveredId] && !teachers[hoveredId].isPlaceholder && (
               <motion.div
-                ref={profileRef}
-                initial={isMobile ? { opacity: 0, y: 20 } : { opacity: 0, scale: 0.9, y: 10 }}
-                animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
-                exit={isMobile ? { opacity: 0, y: 20 } : { opacity: 0, scale: 0.9, y: 10 }}
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 10 }}
                 className={cn(
-                  "z-50 bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-8 shadow-2xl border border-gray-100",
-                  isMobile 
-                    ? "relative mt-8 w-full border-t-4 border-t-kumon-blue" 
-                    : cn(
-                        "absolute w-[450px] max-w-[90vw] pointer-events-none",
-                        hoveredId === 0 ? "top-[180px] left-0" : "top-[280px] left-[100px]"
-                      )
+                  "z-50 bg-white rounded-[40px] p-8 shadow-2xl border border-gray-100 absolute w-[450px] max-w-[90vw] pointer-events-none",
+                  hoveredId === 0 ? "top-[180px] left-0" : "top-[280px] left-[100px]"
                 )}
               >
                 <button 
@@ -165,11 +188,11 @@ export default function TeamShowcase() {
                 <h3 className="text-2xl font-display font-bold text-[#111111] mb-1">
                   {teachers[hoveredId].name}
                 </h3>
-                <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-4 md:mb-6">
+                <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-6">
                   {teachers[hoveredId].role}
                 </p>
-                <div className="h-[1px] bg-gray-100 w-full mb-4 md:mb-6" />
-                <p className="text-sm md:text-base text-body-text leading-relaxed italic">
+                <div className="h-[1px] bg-gray-100 w-full mb-6" />
+                <p className="text-base text-body-text leading-relaxed italic">
                   {teachers[hoveredId].bio}
                 </p>
               </motion.div>

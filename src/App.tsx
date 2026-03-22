@@ -169,15 +169,15 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 md:gap-6 pt-6 px-4 md:px-0">
               <button 
                 onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto whitespace-nowrap cursor-pointer"
+                className="bg-kumon-blue text-white px-5 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-2 md:gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto cursor-pointer text-[13px] md:text-base"
               >
-                Book Free Assessment <ArrowRight size={20} />
+                <span className="whitespace-nowrap">Book Free Assessment</span> <ArrowRight size={18} className="shrink-0 md:w-5 md:h-5" />
               </button>
               <button 
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto whitespace-nowrap cursor-pointer"
+                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto cursor-pointer text-sm md:text-base"
               >
-                Our Method
+                <span className="whitespace-nowrap">Our Method</span>
               </button>
             </div>
           </div>
@@ -618,7 +618,7 @@ const Benefits = () => {
         <div className="bg-white/90 backdrop-blur-md p-6 md:p-16 rounded-[40px] md:rounded-[60px] shadow-2xl border border-white/20">
           <div className="text-center mb-8 md:mb-10">
             <h2 className="text-4xl md:text-7xl font-display font-bold tracking-tighter mb-6 md:mb-8 text-[#111111]">
-              Hi, I’m <span className="text-[#111111]">Nuraini,</span>
+              Hi! I'm <span className="text-[#111111]">Nuraini.</span>
             </h2>
             
             {/* Social Buttons */}
