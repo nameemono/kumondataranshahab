@@ -53,10 +53,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About Us', href: '#contact' },
+    { name: 'About Us', href: '#about-kumon' },
     { name: 'Key Pillars', href: '#how-it-works' },
     { name: 'Instructors', href: '#about' },
     { name: 'Headmaster', href: '#benefits' },
+    { name: 'Contact Us', href: '#location' },
   ];
 
   return (
@@ -1187,7 +1188,7 @@ const Contact = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-transparent py-12 md:py-20 relative z-10">
+    <footer id="location" className="bg-transparent py-12 md:py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl md:rounded-[40px] shadow-xl border border-white/20">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-20">
