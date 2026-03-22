@@ -83,21 +83,21 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-base font-medium uppercase tracking-widest hover:text-kumon-blue transition-colors"
+              className="text-base font-medium uppercase tracking-widest text-white hover:text-white/80 transition-colors cursor-pointer"
             >
               {link.name}
             </a>
           ))}
           <button 
             onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-kumon-blue text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-kumon-blue/90 transition-all shadow-lg shadow-kumon-blue/20"
+            className="bg-white text-kumon-blue px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/90 hover:scale-105 transition-all shadow-lg cursor-pointer"
           >
             Book Free Assessment
           </button>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="md:hidden text-white cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -109,27 +109,34 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-white shadow-xl py-8 px-6 flex flex-col gap-6 md:hidden"
+            className="absolute top-full left-0 w-full bg-kumon-blue shadow-2xl py-10 px-8 flex flex-col gap-8 md:hidden border-t border-white/10 z-50"
           >
-            {navLinks.map((link) => (
-              <a 
+            {navLinks.map((link, index) => (
+              <motion.a 
                 key={link.name} 
                 href={link.href} 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-lg font-display font-medium uppercase tracking-widest border-b border-gray-100 pb-2"
+                className="text-xl font-display font-bold uppercase tracking-widest border-b border-white/10 pb-4 text-white flex justify-between items-center cursor-pointer hover:text-white/80 transition-colors"
               >
                 {link.name}
-              </a>
+                <ChevronRight size={20} className="text-white/40" />
+              </motion.a>
             ))}
-            <button 
+            <motion.button 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
               onClick={() => {
                 setIsMenuOpen(false);
                 document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-kumon-blue text-white py-4 rounded-xl font-bold uppercase tracking-widest"
+              className="bg-white text-kumon-blue py-5 rounded-2xl font-bold uppercase tracking-widest shadow-xl active:scale-95 transition-transform cursor-pointer hover:bg-white/90"
             >
               Book Free Assessment
-            </button>
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -139,36 +146,36 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-transparent py-20">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-transparent py-12 md:py-20">
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
 
-      <div className="max-w-[1100px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1100px] mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-white/80 backdrop-blur-md p-6 md:p-10 rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10 items-center"
+          className="bg-white/80 backdrop-blur-md p-6 md:p-10 rounded-3xl md:rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 md:gap-10 items-center"
         >
-          <div className="space-y-6">
+          <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-5xl md:text-[72px] font-display font-bold leading-[0.85] tracking-tighter text-[#111111]">
               DAH BUAT<br />
               <span className="text-kumon-blue">KUMON?</span>
             </h1>
-            <p className="text-lg text-body-text font-medium max-w-xl leading-relaxed">
+            <p className="text-lg md:text-xl text-body-text font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed px-4 md:px-0">
               KUMON teaches your child how to think, not what to think.
             </p>
-            <div className="flex flex-wrap gap-6 pt-4">
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 md:gap-6 pt-6 px-4 md:px-0">
               <button 
                 onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-3 shadow-xl shadow-kumon-blue/30"
+                className="bg-kumon-blue text-white px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto"
               >
                 Book Free Assessment <ArrowRight size={20} />
               </button>
               <button 
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-3 shadow-xl shadow-kumon-blue/30"
+                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto"
               >
                 Our Method
               </button>
@@ -256,24 +263,24 @@ const Hero = () => {
 
 const AboutKumon = () => {
   return (
-    <section id="about-kumon" className="py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about-kumon" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/90 backdrop-blur-md rounded-[60px] p-12 md:p-20 shadow-2xl border border-white/20 flex flex-col md:flex-row items-center gap-12"
+          className="bg-white/90 backdrop-blur-md rounded-3xl md:rounded-[60px] p-6 md:p-20 shadow-2xl border border-white/20 flex flex-col md:flex-row items-center gap-8 md:gap-12"
         >
-          <div className="md:w-1/2 flex justify-center">
+          <div className="w-full md:w-1/2 flex justify-center">
             <img 
               src="https://i.postimg.cc/QtKm6m8z/1593966872048787-1.jpg" 
               alt="Kumon Logo" 
-              className="w-full max-w-[650px] h-auto object-contain rounded-[40px] shadow-2xl"
+              className="w-full max-w-full md:max-w-[650px] h-auto object-contain rounded-2xl md:rounded-[40px] shadow-2xl"
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="md:w-1/2 space-y-6">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tighter text-[#111111]">
+          <div className="w-full md:w-1/2 space-y-6">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter text-[#111111]">
               NEVER HEARD OF <span className="text-kumon-blue">KUMON?</span>
             </h2>
             <p className="text-lg text-body-text leading-relaxed">
@@ -327,9 +334,9 @@ const Stats = () => {
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center bg-white/80 backdrop-blur-md p-12 rounded-[60px] shadow-2xl border border-white/10 text-kumon-blue">
+    <section className="py-12 md:py-20 relative overflow-hidden bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-center bg-white/80 backdrop-blur-md p-6 md:p-12 rounded-3xl md:rounded-[60px] shadow-2xl border border-white/10 text-kumon-blue">
           {stats.map((stat, i) => (
             <motion.div 
               key={i}
@@ -338,8 +345,8 @@ const Stats = () => {
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="text-4xl md:text-6xl font-display font-bold mb-4">{stat.value}</div>
-              <div className="text-xs uppercase tracking-[0.4em] font-bold text-gray-500">{stat.label}</div>
+              <div className="text-3xl md:text-6xl font-display font-bold mb-2 md:mb-4">{stat.value}</div>
+              <div className="text-[8px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.4em] font-bold text-gray-500">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -350,6 +357,14 @@ const Stats = () => {
 
 const Method = () => {
   const [activeItem, setActiveItem] = useState("item-0");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const steps = [
     {
@@ -375,11 +390,11 @@ const Method = () => {
   const currentImage = steps[parseInt(activeItem.replace("item-", ""))].image;
 
   return (
-    <section id="how-it-works" className="py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how-it-works" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-          <div className="bg-white/90 backdrop-blur-md p-12 md:p-16 rounded-[60px] shadow-2xl border border-white/20 order-2 lg:order-1">
-            <h2 className="text-5xl md:text-6xl font-display font-bold tracking-tighter mb-6 uppercase">
+          <div className="bg-white/90 backdrop-blur-md p-8 md:p-16 rounded-[40px] md:rounded-[60px] shadow-2xl border border-white/20 order-1 lg:order-1">
+            <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter mb-6 uppercase">
               THE 3 <br />
               <span className="text-kumon-blue">PILLARS.</span>
             </h2>
@@ -399,7 +414,7 @@ const Method = () => {
                   key={i} 
                   value={`item-${i}`} 
                   className="border-b-gray-200"
-                  onMouseEnter={() => setActiveItem(`item-${i}`)}
+                  onMouseEnter={() => !isMobile && setActiveItem(`item-${i}`)}
                 >
                   <AccordionTrigger className="hover:no-underline py-6 group">
                     <div className="flex items-center gap-6">
@@ -428,7 +443,7 @@ const Method = () => {
             </Accordion>
           </div>
 
-          <div className="relative order-1 lg:order-2 lg:sticky lg:top-32">
+          <div className="relative order-2 lg:order-2 lg:sticky lg:top-32">
             <AnimatePresence mode="wait">
               <motion.div 
                 key={currentImage}
@@ -436,7 +451,7 @@ const Method = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="aspect-square rounded-[60px] overflow-hidden shadow-2xl bg-gray-100 flex items-center justify-center"
+                className="aspect-video md:aspect-square rounded-[40px] md:rounded-[60px] overflow-hidden shadow-2xl bg-gray-100 flex items-center justify-center"
               >
                 <img 
                   src={currentImage} 
@@ -455,84 +470,136 @@ const Method = () => {
 
 const TwoPictureInteraction = () => {
   const [hovered, setHovered] = useState<'left' | 'right' | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const pictures = {
     left: {
       src: "https://i.postimg.cc/7649DYcc/eny.jpg",
+      name: "Nuraini",
       details: "I'm an English teacher. Fortunately, my own children have gone through Kumon, so I’ve seen firsthand how it builds confidence, discipline, and independent learning. Today, I guide each student step by step, helping them grow at their own pace and reach their full potential."
     },
     right: {
       src: "https://i.postimg.cc/ZRmHZKg2/alun.jpg",
+      name: "Alun",
       details: "Behind this journey is my husband, whose constant support means everything to me. With his encouragement, I’m able to give my full attention to guiding each child’s learning."
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative h-[500px] md:h-[600px]">
+    <div className="max-w-6xl mx-auto px-0 md:px-6 py-4 md:py-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 relative h-auto md:h-[600px]">
         {/* Left Picture */}
-        <div 
-          className="relative h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-[40px]"
-          onMouseEnter={() => setHovered('left')}
-          onMouseLeave={() => setHovered(null)}
-          style={{
-            transform: hovered === 'left' ? 'scale(1.05)' : 'scale(1)',
-            zIndex: hovered === 'left' ? 20 : 10,
-          }}
-        >
-          <img 
-            src={pictures.left.src} 
-            alt="Teacher"
-            className="w-full h-full object-cover rounded-[40px] shadow-2xl transition-all duration-500"
+        <div className="flex flex-col gap-4">
+          <div 
+            className="relative h-[450px] md:h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
+            onMouseEnter={() => setHovered('left')}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => setHovered(hovered === 'left' ? null : 'left')}
             style={{
-              filter: hovered === 'right' ? 'blur(12px) brightness(0.7)' : 'none'
+              transform: hovered === 'left' ? 'scale(1.02)' : 'scale(1)',
+              zIndex: hovered === 'left' ? 20 : 10,
             }}
-            referrerPolicy="no-referrer"
-          />
-          {/* Details for Right Picture (appears on Left when Right is hovered) */}
+          >
+            <img 
+              src={pictures.left.src} 
+              alt="Teacher"
+              className="w-full h-full object-cover rounded-3xl md:rounded-[40px] shadow-2xl transition-all duration-500"
+              style={{
+                filter: hovered === 'right' ? 'blur(12px) brightness(0.7)' : 'none'
+              }}
+              referrerPolicy="no-referrer"
+            />
+            {/* Desktop Details for Right Picture (appears on Left when Right is hovered) */}
+            <AnimatePresence>
+              {hovered === 'right' && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 hidden md:flex flex-col items-center justify-center p-10 text-center z-30 bg-kumon-blue/60 backdrop-blur-md"
+                >
+                  <p className="text-2xl font-bold text-white drop-shadow-lg leading-relaxed">{pictures.right.details}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+            {/* Mobile Overlay Label */}
+            <div className="absolute bottom-6 left-6 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+              <span className="text-kumon-blue font-bold text-sm uppercase tracking-widest">Tap for Details</span>
+            </div>
+          </div>
+          {/* Mobile Details for Left Picture */}
           <AnimatePresence>
-            {hovered === 'right' && (
+            {hovered === 'left' && (
               <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 flex flex-col items-center justify-center p-10 text-center z-30 bg-kumon-blue/60 backdrop-blur-md"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-kumon-blue/10 shadow-lg"
               >
-                <p className="text-xl md:text-2xl font-bold text-white drop-shadow-lg leading-relaxed">{pictures.right.details}</p>
+                <p className="text-body-text leading-relaxed font-medium italic">"{pictures.left.details}"</p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
         {/* Right Picture */}
-        <div 
-          className="relative h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-[40px]"
-          onMouseEnter={() => setHovered('right')}
-          onMouseLeave={() => setHovered(null)}
-          style={{
-            transform: hovered === 'right' ? 'scale(1.05)' : 'scale(1)',
-            zIndex: hovered === 'right' ? 20 : 10,
-          }}
-        >
-          <img 
-            src={pictures.right.src} 
-            alt="Husband"
-            className="w-full h-full object-cover rounded-[40px] shadow-2xl transition-all duration-500"
+        <div className="flex flex-col gap-4">
+          <div 
+            className="relative h-[450px] md:h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
+            onMouseEnter={() => setHovered('right')}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => setHovered(hovered === 'right' ? null : 'right')}
             style={{
-              filter: hovered === 'left' ? 'blur(12px) brightness(0.7)' : 'none'
+              transform: hovered === 'right' ? 'scale(1.02)' : 'scale(1)',
+              zIndex: hovered === 'right' ? 20 : 10,
             }}
-            referrerPolicy="no-referrer"
-          />
-          {/* Details for Left Picture (appears on Right when Left is hovered) */}
+          >
+            <img 
+              src={pictures.right.src} 
+              alt="Husband"
+              className="w-full h-full object-cover rounded-3xl md:rounded-[40px] shadow-2xl transition-all duration-500"
+              style={{
+                filter: hovered === 'left' ? 'blur(12px) brightness(0.7)' : 'none'
+              }}
+              referrerPolicy="no-referrer"
+            />
+            {/* Desktop Details for Left Picture (appears on Right when Left is hovered) */}
+            <AnimatePresence>
+              {hovered === 'left' && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 hidden md:flex flex-col items-center justify-center p-10 text-center z-30 bg-kumon-blue/60 backdrop-blur-md"
+                >
+                  <p className="text-2xl font-bold text-white drop-shadow-lg leading-relaxed">{pictures.left.details}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Mobile Overlay Label */}
+            <div className="absolute bottom-6 left-6 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+              <span className="text-kumon-blue font-bold text-sm uppercase tracking-widest">Tap for Details</span>
+            </div>
+          </div>
+          {/* Mobile Details for Right Picture */}
           <AnimatePresence>
-            {hovered === 'left' && (
+            {hovered === 'right' && (
               <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 flex flex-col items-center justify-center p-10 text-center z-30 bg-kumon-blue/60 backdrop-blur-md"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-kumon-blue/10 shadow-lg"
               >
-                <p className="text-xl md:text-2xl font-bold text-white drop-shadow-lg leading-relaxed">{pictures.left.details}</p>
+                <p className="text-body-text leading-relaxed font-medium italic">"{pictures.right.details}"</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -544,11 +611,11 @@ const TwoPictureInteraction = () => {
 
 const Benefits = () => {
   return (
-    <section id="benefits" className="py-20 bg-transparent overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white/90 backdrop-blur-md p-10 md:p-16 rounded-[60px] shadow-2xl border border-white/20">
-          <div className="text-center mb-10">
-            <h2 className="text-5xl md:text-7xl font-display font-bold tracking-tighter mb-8 text-[#111111]">
+    <section id="benefits" className="py-12 md:py-20 bg-transparent overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="bg-white/90 backdrop-blur-md p-6 md:p-16 rounded-[40px] md:rounded-[60px] shadow-2xl border border-white/20">
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-4xl md:text-7xl font-display font-bold tracking-tighter mb-6 md:mb-8 text-[#111111]">
               Hi, I’m <span className="text-[#111111]">Nuraini,</span>
             </h2>
             
@@ -660,34 +727,34 @@ const AssessmentSection = () => {
   }
 
   return (
-    <section id="assessment" className="py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="assessment" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Hero Part - Combined into one box */}
-        <div className="mb-20">
+        <div className="mb-12 md:mb-20">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white/90 backdrop-blur-md rounded-[60px] border border-white/30 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2"
+            className="bg-white/90 backdrop-blur-md rounded-3xl md:rounded-[60px] border border-white/30 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2"
           >
-            <div className="p-10 md:p-20 flex flex-col justify-center">
-              <h2 className="text-[48px] md:text-[64px] font-bold text-[#111111] leading-tight mb-6">
+            <div className="p-6 md:p-20 flex flex-col justify-center">
+              <h2 className="text-3xl md:text-[64px] font-bold text-[#111111] leading-tight mb-6">
                 Book Your Child’s <br />
                 <span className="text-kumon-blue">Free Assessment</span>
               </h2>
-              <p className="text-[20px] md:text-[24px] text-body-text mb-8 leading-relaxed font-medium">
+              <p className="text-lg md:text-[24px] text-body-text mb-8 leading-relaxed font-medium">
                 Tell us about your child so we can recommend the right starting level.
               </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-10">
                 {[
                   'Personalised learning plan',
                   'No pressure, no obligation',
                   'Suitable for all levels',
                   'Expert guidance'
                 ].map((bullet) => (
-                  <li key={bullet} className="flex items-center gap-3 text-body-text font-semibold text-lg">
-                    <div className="w-6 h-6 rounded-full bg-kumon-blue/10 text-kumon-blue flex items-center justify-center shrink-0">
-                      <Check size={14} />
+                  <li key={bullet} className="flex items-center gap-3 text-body-text font-semibold text-sm md:text-lg">
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-kumon-blue/10 text-kumon-blue flex items-center justify-center shrink-0">
+                      <Check size={12} />
                     </div>
                     {bullet}
                   </li>
@@ -695,12 +762,12 @@ const AssessmentSection = () => {
               </ul>
               <button 
                 onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-12 py-6 rounded-full font-bold text-[20px] hover:scale-105 transition-all shadow-xl shadow-kumon-blue/30 uppercase tracking-widest w-fit"
+                className="bg-kumon-blue text-white px-8 md:px-12 py-4 md:py-6 rounded-full font-bold text-lg md:text-[20px] hover:scale-105 transition-all shadow-xl shadow-kumon-blue/30 uppercase tracking-widest w-full md:w-fit"
               >
                 Start Assessment
               </button>
             </div>
-            <div className="relative h-[400px] lg:h-auto">
+            <div className="relative h-[300px] md:h-[400px] lg:h-auto">
               <img 
                 src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop" 
                 alt="Children Learning" 
@@ -713,17 +780,17 @@ const AssessmentSection = () => {
         </div>
 
         {/* Form Part */}
-        <div id="form-start" className="max-w-3xl mx-auto py-20 scroll-mt-20">
-          <div className="bg-white/90 backdrop-blur-md p-8 md:p-12 rounded-[40px] shadow-2xl border border-white/20 mb-12">
+        <div id="form-start" className="max-w-3xl mx-auto py-12 md:py-20 scroll-mt-20">
+          <div className="bg-white/90 backdrop-blur-md p-6 md:p-12 rounded-3xl md:rounded-[40px] shadow-2xl border border-white/20 mb-8 md:mb-12">
             {/* Header for Free Assessment */}
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tighter text-[#111111] uppercase">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter text-[#111111] uppercase">
                 Free <span className="text-kumon-blue">Assessment</span>
               </h2>
             </div>
             {/* Progress Bar */}
             <div className="mb-0">
-              <div className="flex justify-between text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">
+              <div className="flex justify-between text-[10px] md:text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">
                 <span>Step {step} of 3</span>
                 <span>{Math.round((step / 3) * 100)}% Complete</span>
               </div>
@@ -737,7 +804,7 @@ const AssessmentSection = () => {
             </div>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-white/20">
+          <div className="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-3xl md:rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-white/20">
             <AnimatePresence mode="wait">
               {step === 1 && (
                 <motion.div
@@ -1011,16 +1078,16 @@ const TestimonialDemo = () => {
   ];
 
   return (
-    <section className="py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white/90 backdrop-blur-md p-12 md:p-20 rounded-[60px] shadow-2xl border border-white/20">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tighter text-[#111111] mb-4">
+    <section className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="bg-white/90 backdrop-blur-md p-6 md:p-20 rounded-3xl md:rounded-[60px] shadow-2xl border border-white/20">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter text-[#111111] mb-4">
               WHAT PARENTS <span className="text-kumon-blue">SAY</span>
             </h2>
-            <p className="text-gray-500 uppercase tracking-widest font-bold text-sm">Trusted by millions of students worldwide</p>
+            <p className="text-gray-500 uppercase tracking-widest font-bold text-[10px] md:text-sm">Trusted by millions of students worldwide</p>
           </div>
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
               <Testimonial key={testimonial.name} {...testimonial} className="border-gray-100 shadow-sm" />
             ))}
@@ -1035,34 +1102,34 @@ const Contact = () => {
   const whatsappLink = `https://wa.me/+60124362984?text=${encodeURIComponent("Hi! I would like to book a free assessment for my child.")}`;
 
   return (
-    <section id="contact" className="py-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white/95 backdrop-blur-md text-kumon-ink rounded-[60px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl border border-white/20 relative">
+    <section id="contact" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="bg-white/95 backdrop-blur-md text-kumon-ink rounded-3xl md:rounded-[60px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 shadow-2xl border border-white/20 relative">
           {/* Urgency Badge */}
-          <div className="absolute top-6 right-6 z-20">
-            <div className="bg-red-500 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest animate-pulse">
-              Limited slots available this month
+          <div className="absolute top-4 md:top-6 right-4 md:right-6 z-20">
+            <div className="bg-red-500 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest animate-pulse">
+              Limited slots
             </div>
           </div>
 
-          <div className="p-12 md:p-20">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tighter mb-6 leading-tight">
+          <div className="p-6 md:p-20">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter mb-6 leading-tight">
               Ready to Start Your Child’s <br />
               <span className="text-kumon-blue">Learning Journey?</span>
             </h2>
-            <p className="text-gray-600 mb-8 max-w-md text-lg leading-relaxed">
+            <p className="text-gray-600 mb-8 max-w-md text-base md:text-lg leading-relaxed">
               Book a free assessment and discover your child’s true potential with Kumon.
             </p>
 
-            <div className="space-y-6 mb-10">
+            <div className="space-y-4 md:space-y-6 mb-10">
               {[
                 'Builds confidence & discipline',
                 'Develops independent learning',
                 'Personalized learning pace'
               ].map((benefit) => (
-                <div key={benefit} className="flex items-center gap-4 text-gray-700 font-semibold">
-                  <div className="w-6 h-6 rounded-full bg-kumon-blue/10 text-kumon-blue flex items-center justify-center">
-                    <Check size={14} />
+                <div key={benefit} className="flex items-center gap-4 text-gray-700 font-semibold text-sm md:text-base">
+                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-kumon-blue/10 text-kumon-blue flex items-center justify-center shrink-0">
+                    <Check size={12} md:size={14} />
                   </div>
                   {benefit}
                 </div>
@@ -1070,29 +1137,29 @@ const Contact = () => {
             </div>
 
             <div className="space-y-6 pt-6 border-t border-gray-100">
-              <div className="flex items-center gap-6">
-                <div className="w-10 h-10 rounded-full bg-kumon-blue/10 flex items-center justify-center text-kumon-blue">
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="w-10 h-10 rounded-full bg-kumon-blue/10 flex items-center justify-center text-kumon-blue shrink-0">
                   <Phone size={18} />
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-gray-400 mb-1">Call Us</p>
-                  <p className="font-bold text-base">+60 12-436 2984</p>
+                  <p className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mb-1">Call Us</p>
+                  <p className="font-bold text-sm md:text-base">+60 12-436 2984</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6">
-                <div className="w-10 h-10 rounded-full bg-kumon-blue/10 flex items-center justify-center text-kumon-blue">
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="w-10 h-10 rounded-full bg-kumon-blue/10 flex items-center justify-center text-kumon-blue shrink-0">
                   <Mail size={18} />
                 </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-gray-400 mb-1">Email Us</p>
-                  <p className="font-bold text-base">dataranshahab@kumon.com.my</p>
+                <div className="min-w-0">
+                  <p className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mb-1">Email Us</p>
+                  <p className="font-bold text-sm md:text-base truncate">dataranshahab@kumon.com.my</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-12 md:p-20 text-kumon-ink border-l border-gray-100 shadow-inner">
-            <div className="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-100 h-[300px]">
+          <div className="bg-white p-8 md:p-20 text-kumon-ink border-l border-gray-100 shadow-inner">
+            <div className="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-100 h-[250px] md:h-[300px]">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.671342673238!2d100.364444!3d6.116667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b4362984%3A0x304b4362984!2sKumon%20Dataran%20Shahab!5e0!3m2!1sen!2smy!4v1711000000000!5m2!1sen!2smy" 
                 width="100%" 
@@ -1105,7 +1172,7 @@ const Contact = () => {
             </div>
             <button 
               onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full bg-kumon-blue text-white py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20"
+              className="w-full bg-kumon-blue text-white py-4 md:py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20"
             >
               Book Free Assessment <ArrowRight size={18} />
             </button>
@@ -1118,25 +1185,25 @@ const Contact = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-transparent py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white/80 backdrop-blur-md p-12 rounded-[40px] shadow-xl border border-white/20">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+    <footer className="bg-transparent py-12 md:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl md:rounded-[40px] shadow-xl border border-white/20">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-20">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-6">
                 <img 
                   src="https://kumonmalaysia.com/wp-content/themes/kumon/assets/img/logo.png" 
                   alt="Kumon Logo" 
-                  className="h-8 w-auto object-contain"
+                  className="h-6 md:h-8 w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
-                <span className="font-display font-bold text-lg tracking-tighter uppercase ml-2">
+                <span className="font-display font-bold text-base md:text-lg tracking-tighter uppercase ml-2">
                   Dataran Shahab
                 </span>
               </div>
               
               {/* Map Section */}
-              <div className="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-100 h-[200px]">
+              <div className="mb-6 rounded-2xl overflow-hidden shadow-md border border-gray-100 h-[150px] md:h-[200px]">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.671342673238!2d100.364444!3d6.116667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b4362984%3A0x304b4362984!2sKumon%20Dataran%20Shahab!5e0!3m2!1sen!2smy!4v1711000000000!5m2!1sen!2smy" 
                   width="100%" 
@@ -1147,7 +1214,7 @@ const Footer = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
                 Kumon Persiaran SSAH 1B, 127 & 128, 2nd Floor, Kompleks Perniagaan Sultan Abdul Hamid, Persiaran SSAH 1B, 05050, Alor Setar, Kedah, 05050
               </p>
             </div>
@@ -1223,13 +1290,13 @@ export default function App() {
       <Footer />
       
       {/* Floating Action Button */}
-      <div className="fixed bottom-10 right-10 z-40 flex flex-col items-center gap-4 group">
+      <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-40 flex flex-col items-center gap-4 group">
         <div className="flex flex-col gap-4 opacity-0 translate-y-10 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
           <a 
             href="https://www.facebook.com/people/Kumon-Dataran-Shahab/61588271020588/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="w-12 h-12 bg-white text-kumon-blue rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-12 h-12 md:w-12 md:h-12 bg-white text-kumon-blue rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-90"
           >
             <Facebook size={20} />
           </a>
@@ -1237,7 +1304,7 @@ export default function App() {
             href="https://www.instagram.com/kumondataranshahab?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="w-12 h-12 bg-white text-kumon-blue rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-12 h-12 md:w-12 md:h-12 bg-white text-kumon-blue rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-90"
           >
             <Instagram size={20} />
           </a>
@@ -1245,7 +1312,7 @@ export default function App() {
             href="https://www.tiktok.com/@kumon.dataran.sha?_r=1&_t=ZS-94OcCglgX92" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="w-12 h-12 bg-white text-kumon-blue rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-12 h-12 md:w-12 md:h-12 bg-white text-kumon-blue rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-90"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.1.7.1 1.41.53 1.98.5.73 1.36 1.19 2.26 1.2 1.02.06 2.09-.44 2.69-1.26.54-.78.53-1.78.51-2.69-.01-3.99-.01-7.98-.01-11.97z"/>
@@ -1255,7 +1322,8 @@ export default function App() {
         <motion.button 
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="w-16 h-16 bg-kumon-blue text-white rounded-full shadow-2xl flex items-center justify-center"
+          onClick={() => window.open('tel:+60124362984')}
+          className="w-16 h-16 md:w-16 md:h-16 bg-kumon-blue text-white rounded-full shadow-2xl flex items-center justify-center active:bg-kumon-blue/90"
         >
           <Phone size={24} />
         </motion.button>
