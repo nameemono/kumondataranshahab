@@ -151,12 +151,12 @@ const Hero = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
 
-      <div className="max-w-[1100px] mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-white/80 backdrop-blur-md p-6 md:p-10 rounded-3xl md:rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 md:gap-10 items-center"
+          className="bg-white/80 backdrop-blur-md p-6 md:p-12 rounded-3xl md:rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 md:gap-16 items-center"
         >
           <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-5xl md:text-[72px] font-display font-bold leading-[0.85] tracking-tighter text-[#111111]">
@@ -169,13 +169,13 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 md:gap-6 pt-6 px-4 md:px-0">
               <button 
                 onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto"
+                className="bg-kumon-blue text-white px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto whitespace-nowrap cursor-pointer"
               >
                 Book Free Assessment <ArrowRight size={20} />
               </button>
               <button 
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto"
+                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-8 md:px-10 py-5 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto whitespace-nowrap cursor-pointer"
               >
                 Our Method
               </button>
@@ -191,9 +191,9 @@ const Hero = () => {
             {/* Image 1: Top Left */}
             <motion.div 
               initial={{ x: -100, y: -80, rotate: -15, opacity: 0 }}
-              animate={{ x: -60, y: -90, rotate: -8, opacity: 1 }}
+              animate={{ x: 10, y: -60, rotate: -8, opacity: 1 }}
               transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 -translate-x-full -translate-y-full w-[240px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-10 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
+              className="absolute top-1/2 left-1/2 -translate-x-full -translate-y-full w-[200px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-10 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
             >
               <img 
                 src="https://i.postimg.cc/3Ntp8HNP/Asian-girl-student-online-learning-class-study-online-with-the-teacher-happy-girl-learn-english-lang.jpg" 
@@ -206,9 +206,9 @@ const Hero = () => {
             {/* Image 2: Top Right */}
             <motion.div 
               initial={{ x: 100, y: -80, rotate: 15, opacity: 0 }}
-              animate={{ x: 50, y: -70, rotate: 6, opacity: 1 }}
+              animate={{ x: 70, y: -50, rotate: 6, opacity: 1 }}
               transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 -translate-y-full w-[240px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-20 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
+              className="absolute top-1/2 left-1/2 -translate-y-full w-[200px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-20 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
             >
               <img 
                 src="https://i.postimg.cc/1RrrCkmd/60474d860e858e6bcda4556c80e9b3f2.jpg" 
@@ -221,9 +221,9 @@ const Hero = () => {
             {/* Image 3: Bottom Left */}
             <motion.div 
               initial={{ x: -100, y: 80, rotate: -10, opacity: 0 }}
-              animate={{ x: -70, y: 60, rotate: -4, opacity: 1 }}
+              animate={{ x: 0, y: 40, rotate: -4, opacity: 1 }}
               transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 -translate-x-full w-[240px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-30 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
+              className="absolute top-1/2 left-1/2 -translate-x-full w-[200px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-xl border-4 border-white z-30 hover:z-50 hover:scale-110 transition-all duration-500 cursor-pointer group"
             >
               <img 
                 src="https://i.postimg.cc/v8ttqJYk/694e10a1eb8061bb47b9515afdb174e4.jpg" 
@@ -236,9 +236,9 @@ const Hero = () => {
             {/* Image 4: Bottom Right (Happy Student) */}
             <motion.div 
               initial={{ x: 100, y: 80, rotate: 10, opacity: 0 }}
-              animate={{ x: 40, y: 80, rotate: 10, opacity: 1 }}
+              animate={{ x: 60, y: 60, rotate: 10, opacity: 1 }}
               transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-              className="absolute top-1/2 left-1/2 w-[280px] aspect-[3/4] rounded-[40px] overflow-hidden shadow-2xl border-8 border-white z-40 hover:z-50 hover:scale-105 transition-all duration-500 cursor-pointer group"
+              className="absolute top-1/2 left-1/2 w-[240px] aspect-[3/4] rounded-[40px] overflow-hidden shadow-2xl border-8 border-white z-40 hover:z-50 hover:scale-105 transition-all duration-500 cursor-pointer group"
             >
               <img 
                 src="https://i.postimg.cc/G3xx7WLN/8adbf493d4d0714d59329c33ca13d86d.jpg" 
@@ -416,26 +416,26 @@ const Method = () => {
                   className="border-b-gray-200"
                   onMouseEnter={() => !isMobile && setActiveItem(`item-${i}`)}
                 >
-                  <AccordionTrigger className="hover:no-underline py-6 group">
-                    <div className="flex items-center gap-6">
+                  <AccordionTrigger className="hover:no-underline py-4 md:py-6 group">
+                    <div className="flex items-center gap-4 md:gap-6">
                       <div className={cn(
-                        "flex-shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-sm transition-all",
+                        "flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center font-bold text-xs md:text-sm transition-all",
                         activeItem === `item-${i}` ? "border-kumon-blue bg-kumon-blue text-white" : "border-gray-300 text-gray-400 group-hover:border-kumon-blue group-hover:text-kumon-blue"
                       )}>
                         0{i + 1}
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-2 md:gap-3">
                         <h4 className={cn(
-                          "text-lg font-display font-bold uppercase tracking-widest transition-colors",
+                          "text-base md:text-lg font-display font-bold uppercase tracking-widest transition-colors",
                           activeItem === `item-${i}` ? "text-kumon-blue" : "text-gray-500 group-hover:text-kumon-blue"
                         )}>{step.title}</h4>
-                        <span className="text-xs bg-kumon-blue/10 text-kumon-blue px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">
+                        <span className="text-[10px] md:text-xs bg-kumon-blue/10 text-kumon-blue px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">
                           {step.emotion}
                         </span>
                       </div>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="text-body-text leading-relaxed text-base pl-16 pb-6">
+                  <AccordionContent className="text-body-text leading-relaxed text-sm md:text-base pl-12 md:pl-16 pb-6">
                     {step.desc}
                   </AccordionContent>
                 </AccordionItem>
@@ -493,12 +493,12 @@ const TwoPictureInteraction = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-0 md:px-6 py-4 md:py-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 relative h-auto md:h-[600px]">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 relative">
         {/* Left Picture */}
         <div className="flex flex-col gap-4">
           <div 
-            className="relative h-[450px] md:h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
+            className="relative h-[400px] md:h-[600px] transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
             onMouseEnter={() => setHovered('left')}
             onMouseLeave={() => setHovered(null)}
             onClick={() => setHovered(hovered === 'left' ? null : 'left')}
@@ -532,19 +532,20 @@ const TwoPictureInteraction = () => {
             
             {/* Mobile Overlay Label */}
             <div className="absolute bottom-6 left-6 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <span className="text-kumon-blue font-bold text-sm uppercase tracking-widest">Tap for Details</span>
+              <span className="text-kumon-blue font-bold text-xs uppercase tracking-widest">Tap for Details</span>
             </div>
           </div>
           {/* Mobile Details for Left Picture */}
           <AnimatePresence>
             {hovered === 'left' && (
               <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-kumon-blue/10 shadow-lg"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="md:hidden bg-kumon-blue text-white p-6 rounded-2xl shadow-xl border border-white/20"
               >
-                <p className="text-body-text leading-relaxed font-medium italic">"{pictures.left.details}"</p>
+                <h4 className="font-display font-bold uppercase tracking-widest text-sm mb-2 opacity-80">{pictures.left.name}</h4>
+                <p className="text-sm leading-relaxed font-medium italic">"{pictures.left.details}"</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -553,7 +554,7 @@ const TwoPictureInteraction = () => {
         {/* Right Picture */}
         <div className="flex flex-col gap-4">
           <div 
-            className="relative h-[450px] md:h-full transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
+            className="relative h-[400px] md:h-[600px] transition-all duration-500 ease-in-out cursor-pointer overflow-hidden rounded-3xl md:rounded-[40px] group"
             onMouseEnter={() => setHovered('right')}
             onMouseLeave={() => setHovered(null)}
             onClick={() => setHovered(hovered === 'right' ? null : 'right')}
@@ -587,19 +588,20 @@ const TwoPictureInteraction = () => {
 
             {/* Mobile Overlay Label */}
             <div className="absolute bottom-6 left-6 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-              <span className="text-kumon-blue font-bold text-sm uppercase tracking-widest">Tap for Details</span>
+              <span className="text-kumon-blue font-bold text-xs uppercase tracking-widest">Tap for Details</span>
             </div>
           </div>
           {/* Mobile Details for Right Picture */}
           <AnimatePresence>
             {hovered === 'right' && (
               <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-kumon-blue/10 shadow-lg"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="md:hidden bg-kumon-blue text-white p-6 rounded-2xl shadow-xl border border-white/20"
               >
-                <p className="text-body-text leading-relaxed font-medium italic">"{pictures.right.details}"</p>
+                <h4 className="font-display font-bold uppercase tracking-widest text-sm mb-2 opacity-80">{pictures.right.name}</h4>
+                <p className="text-sm leading-relaxed font-medium italic">"{pictures.right.details}"</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -1003,17 +1005,17 @@ const AssessmentSection = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col md:flex-row gap-4">
                     <button 
                       onClick={prevStep}
-                      className="flex-1 border-2 border-gray-200 text-gray-500 py-5 rounded-full font-semibold text-[16px] hover:bg-gray-50 transition-all"
+                      className="flex-1 border-2 border-gray-200 text-gray-500 py-4 md:py-5 rounded-full font-semibold text-sm md:text-[16px] hover:bg-gray-50 transition-all"
                     >
                       Back
                     </button>
                     <button 
                       onClick={handleSubmit}
                       disabled={formData.subjects.length === 0 || !formData.hasTablet || !formData.hasStylus || !formData.hasInternet}
-                      className="flex-[2] bg-kumon-blue text-white py-5 rounded-full font-bold text-[16px] hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest"
+                      className="flex-[2] bg-kumon-blue text-white py-4 md:py-5 rounded-full font-bold text-sm md:text-[16px] hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest"
                     >
                       Book Free Assessment
                     </button>

@@ -126,27 +126,28 @@ export default function TeamShowcase() {
             <AnimatePresence>
               {hoveredId !== null && teachers[hoveredId] && !teachers[hoveredId].isPlaceholder && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: 10 }}
                   className={cn(
-                    "z-50 bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-8 shadow-2xl border border-gray-100",
+                    "z-50 bg-white rounded-[24px] md:rounded-[40px] p-5 md:p-8 shadow-2xl border border-gray-100",
                     isMobile 
-                      ? "fixed inset-x-4 bottom-24 md:bottom-10" 
+                      ? "absolute top-0 left-0 w-full h-full flex flex-col justify-center bg-white/95 backdrop-blur-sm" 
                       : cn(
                           "absolute w-[450px] max-w-[90vw] pointer-events-none",
                           hoveredId === 0 ? "top-[180px] left-0" : "top-[280px] left-[100px]"
                         )
                   )}
                 >
-                  {isMobile && (
-                    <button 
-                      onClick={() => setHoveredId(null)}
-                      className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shadow-sm active:scale-95 transition-transform"
-                    >
-                      <X size={20} />
-                    </button>
-                  )}
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHoveredId(null);
+                    }}
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shadow-sm active:scale-95 transition-transform"
+                  >
+                    <X size={20} />
+                  </button>
                   <span className="text-[10px] font-bold text-kumon-blue uppercase tracking-[0.2em] mb-2 block">
                     INSTRUCTOR PROFILE
                   </span>
@@ -190,18 +191,22 @@ export default function TeamShowcase() {
             {teachers.map((teacher) => (
               <div 
                 key={teacher.id}
+                onClick={() => !teacher.isPlaceholder && setHoveredId(teacher.id)}
                 className={cn(
-                  "flex items-center gap-4 transition-all duration-300",
-                  hoveredId === teacher.id ? "opacity-100 translate-x-2" : "opacity-40"
+                  "flex items-center gap-4 transition-all duration-300 cursor-pointer group",
+                  hoveredId === teacher.id ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"
                 )}
               >
                 <div className={cn(
                   "w-4 h-2 rounded-full transition-all",
-                  hoveredId === teacher.id ? "bg-kumon-blue w-6" : "bg-gray-400"
+                  hoveredId === teacher.id ? "bg-kumon-blue w-6" : "bg-gray-400 group-hover:bg-kumon-blue/50"
                 )} />
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="font-display font-bold text-lg text-[#111111]">
+                    <h4 className={cn(
+                      "font-display font-bold text-lg transition-colors",
+                      hoveredId === teacher.id ? "text-kumon-blue" : "text-[#111111]"
+                    )}>
                       {teacher.name}
                     </h4>
                     {!teacher.isPlaceholder && <Linkedin size={12} className="text-gray-300" />}
