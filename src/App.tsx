@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Instagram,
   Facebook,
+  Youtube,
   Phone,
   Mail,
   MapPin,
@@ -26,13 +27,20 @@ import {
   Check,
   Globe,
   Award,
-  TrendingUp
+  TrendingUp,
+  Sparkles,
+  Zap,
+  ArrowDownToDot,
+  Calendar,
+  Bell,
+  Info
 } from 'lucide-react';
 import { Testimonial } from './components/ui/testimonial-card';
 import { cn } from './lib/utils';
 import TeamShowcase from './components/ui/team-showcase';
 import { FeatureSteps } from './components/ui/feature-section';
 import { Carousel } from './components/ui/carousel';
+import { PricingSection } from './components/ui/pricing-section';
 import {
   Accordion,
   AccordionContent,
@@ -41,6 +49,32 @@ import {
 } from "./components/ui/accordion";
 
 // --- Components ---
+
+const TopBar = () => (
+  <div className="bg-[#65A8C7] text-white py-2 px-6 hidden md:block">
+    <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] font-bold tracking-widest uppercase">
+      <div className="flex items-center gap-2">
+        <Globe size={12} />
+        <span>MALAYSIA</span>
+      </div>
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <span>FOLLOW US</span>
+          <div className="flex items-center gap-3">
+            <a href="#" className="hover:opacity-80 transition-opacity"><Facebook size={14} fill="currentColor" /></a>
+            <a href="#" className="hover:opacity-80 transition-opacity"><Instagram size={14} /></a>
+            <a href="#" className="hover:opacity-80 transition-opacity">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.21-1.35 2.06-.11.97.31 1.99 1.13 2.53.65.45 1.46.6 2.26.48.83-.06 1.6-.54 2.01-1.23.3-.55.39-1.18.4-1.81-.02-3.71-.01-7.42-.01-11.12z"/>
+              </svg>
+            </a>
+            <a href="#" className="hover:opacity-80 transition-opacity"><Youtube size={14} /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,100 +88,259 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'About Us', href: '#about-kumon' },
-    { name: 'Key Pillars', href: '#how-it-works' },
+    { name: "What's New", href: '#whats-new' },
+    { name: 'Pricing', href: '#pricing' },
     { name: 'Instructors', href: '#about' },
-    { name: 'Headmaster', href: '#benefits' },
     { name: 'Contact Us', href: '#location' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-kumon-blue py-4 shadow-md' : 'bg-kumon-blue/80 backdrop-blur-sm py-8'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div 
-          className="flex flex-col items-start leading-none cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          <img 
-            src="https://kumonmalaysia.com/wp-content/themes/kumon/assets/img/logo.png" 
-            alt="Kumon Logo" 
-            className="h-6 md:h-8 w-auto object-contain mb-1"
-            referrerPolicy="no-referrer"
-          />
-          <span className="font-display font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/90 whitespace-nowrap">
-            Dataran Shahab
-          </span>
-        </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              className="text-base font-medium uppercase tracking-widest text-white hover:text-white/80 transition-colors cursor-pointer"
-            >
-              {link.name}
-            </a>
-          ))}
-          <button 
-            onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white text-kumon-blue px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/90 hover:scale-105 transition-all shadow-lg cursor-pointer"
+    <header className="fixed top-0 left-0 w-full z-50">
+      <TopBar />
+      <nav className={`w-full transition-all duration-300 ${isScrolled ? 'bg-white py-2 shadow-xl border-b border-gray-100' : 'bg-white/95 backdrop-blur-md py-4 border-b border-gray-100'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div 
+            className="flex items-center gap-4 cursor-pointer group"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            Book Free Assessment
+            <div className="">
+              <img 
+                src="https://i.postimg.cc/y6XYM6M2/image.png" 
+                alt="Kumon Logo" 
+                className="h-10 md:h-14 w-auto object-contain mix-blend-multiply"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="flex flex-col border-l border-gray-200 pl-4">
+              <span className="font-display font-black text-xl md:text-2xl tracking-tight text-[#65A8C7] leading-none">
+                DATARAN SHAHAB
+              </span>
+              <span className="font-display font-bold text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-gray-400 mt-1">
+                KUMON LEARNING CENTRE
+              </span>
+            </div>
+          </div>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-10 flex-nowrap">
+            <div className="flex items-center gap-8 flex-nowrap">
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  className="text-[13px] font-bold uppercase tracking-widest text-gray-500 hover:text-[#65A8C7] transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+            <button 
+              onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-[#65A8C7] text-white px-8 py-3 rounded-full text-[13px] font-bold uppercase tracking-widest hover:bg-[#65A8C7]/90 hover:scale-105 transition-all shadow-md cursor-pointer whitespace-nowrap"
+            >
+              Book Free Assessment
+            </button>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button className="md:hidden text-[#65A8C7] cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-white cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-kumon-blue shadow-2xl py-10 px-8 flex flex-col gap-8 md:hidden border-t border-white/10 z-50"
-          >
-            {navLinks.map((link, index) => (
-              <motion.a 
-                key={link.name} 
-                href={link.href} 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xl font-display font-bold uppercase tracking-widest border-b border-white/10 pb-4 text-white flex justify-between items-center cursor-pointer hover:text-white/80 transition-colors"
-              >
-                {link.name}
-                <ChevronRight size={20} className="text-white/40" />
-              </motion.a>
-            ))}
-            <motion.button 
-              initial={{ opacity: 0, y: 20 }}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              onClick={() => {
-                setIsMenuOpen(false);
-                document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="bg-white text-kumon-blue py-5 rounded-2xl font-bold uppercase tracking-widest shadow-xl active:scale-95 transition-transform cursor-pointer hover:bg-white/90"
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-full left-0 w-full bg-white shadow-2xl py-10 px-8 flex flex-col gap-8 md:hidden border-t border-gray-100 z-50"
             >
-              Book Free Assessment
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+              {navLinks.map((link, index) => (
+                <motion.a 
+                  key={link.name} 
+                  href={link.href} 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-xl font-display font-bold uppercase tracking-widest border-b border-gray-100 pb-4 text-gray-800 flex justify-between items-center cursor-pointer hover:text-kumon-blue transition-colors"
+                >
+                  {link.name}
+                  <ChevronRight size={20} className="text-gray-300" />
+                </motion.a>
+              ))}
+              <motion.button 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="bg-kumon-blue text-white py-5 rounded-2xl font-bold uppercase tracking-widest shadow-xl active:scale-95 transition-transform cursor-pointer hover:bg-kumon-blue/90"
+              >
+                Book Free Assessment
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
+  );
+};
+
+const WhatsNew = () => {
+  const updates = [
+    {
+      title: "Upcoming Parent Orientation",
+      date: "April 5th, 2026",
+      description: "Join us for an in-depth session on how to maximize your child's Kumon journey at home.",
+      icon: <Calendar className="w-6 h-6 text-kumon-blue" />,
+      tag: "Event"
+    },
+    {
+      title: "Student Achievement Awards",
+      date: "Monthly Update",
+      description: "Celebrating our top math students who have reached their milestones this month!",
+      icon: <Award className="w-6 h-6 text-kumon-blue" />,
+      tag: "Achievement"
+    },
+    {
+      title: "Holiday Program Registration",
+      date: "June Intake",
+      description: "Registration for our intensive June holiday program is now open. Limited slots available!",
+      icon: <Bell className="w-6 h-6 text-kumon-blue" />,
+      tag: "Notice"
+    }
+  ];
+
+  return (
+    <section id="whats-new" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/80 backdrop-blur-xl rounded-3xl md:rounded-[60px] p-8 md:p-20 shadow-2xl border border-white/20"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter text-[#111111] mb-4">
+              WHAT'S <span className="text-kumon-blue">NEW</span>
+            </h2>
+            <p className="text-gray-500 uppercase tracking-widest font-bold text-sm">Stay updated with Kumon Dataran Shahab</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {updates.map((update, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white p-8 rounded-[32px] shadow-lg border border-gray-100 hover:shadow-xl transition-all group"
+              >
+                <div className="flex justify-between items-start mb-6">
+                  <div className="p-4 bg-kumon-blue/10 rounded-2xl group-hover:scale-110 transition-transform">
+                    {update.icon}
+                  </div>
+                  <span className="px-3 py-1 bg-kumon-blue text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+                    {update.tag}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-[#111111] mb-2">{update.title}</h3>
+                <p className="text-kumon-blue font-bold text-xs uppercase tracking-widest mb-4">{update.date}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{update.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Pricing = () => {
+  const tiers = [
+    {
+      name: "Single Subject",
+      price: {
+        monthly: 160,
+        yearly: 1920,
+      },
+      description: "Choose either Math OR English for focused mastery",
+      icon: (
+        <div className="relative">
+          <Zap className="w-7 h-7 relative z-10 text-kumon-blue" />
+        </div>
+      ),
+      features: [
+        { name: "Math OR English", description: "One subject of your choice", included: true },
+        { name: "Diagnostic Test", description: "Initial assessment to find starting point", included: true },
+        { name: "Individualized Plan", description: "Tailored to your child's pace", included: true },
+        { name: "Daily Practice", description: "Consistent learning materials", included: true },
+        { name: "Progress Tracking", description: "Monthly reports for parents", included: true },
+      ],
+    },
+    {
+      name: "Double Subject",
+      price: {
+        monthly: 300,
+        yearly: 3600,
+      },
+      description: "Enroll in both Math AND English for total confidence",
+      highlight: true,
+      badge: "Best Value",
+      icon: (
+        <div className="relative">
+          <Sparkles className="w-7 h-7 relative z-10 text-kumon-blue" />
+        </div>
+      ),
+      features: [
+        { name: "Math AND English", description: "Full access to both programs", included: true },
+        { name: "RM20 Discount", description: "Save RM20 every month", included: true },
+        { name: "Integrated Schedule", description: "Optimized learning time", included: true },
+        { name: "Priority Support", description: "Direct access to instructors", included: true },
+        { name: "Faster Progress", description: "Synergy between subjects", included: true },
+      ],
+    },
+  ];
+
+  return (
+    <section id="pricing" className="py-12 md:py-20 bg-transparent">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/80 backdrop-blur-xl rounded-3xl md:rounded-[60px] p-4 md:p-12 shadow-2xl border border-white/20 overflow-hidden"
+        >
+          <div className="text-center mb-6">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tighter text-[#111111] mb-2">
+              INVEST IN THEIR <span className="text-kumon-blue">FUTURE</span>
+            </h2>
+            <p className="text-gray-500 uppercase tracking-widest font-bold text-xs">Transparent monthly fees per student</p>
+          </div>
+          
+          <PricingSection tiers={tiers} className="bg-transparent py-0" />
+          
+          <div className="mt-12 p-6 bg-kumon-blue/5 rounded-2xl border border-kumon-blue/10 text-center max-w-2xl mx-auto">
+            <p className="text-sm text-gray-600">
+              <span className="font-bold text-kumon-blue uppercase tracking-widest mr-2">Note:</span>
+              A one-time registration fee of <span className="font-bold text-[#111111]">RM50</span> and a materials fee apply upon enrollment. Prices are subject to change with prior notice.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-transparent py-12 md:py-20">
+    <section id="home" className="relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden bg-transparent py-12 md:py-20">
       {/* Background Decorative Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] border-[1px] border-white/10 rounded-full pointer-events-none opacity-20" />
@@ -157,26 +350,45 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-white/80 backdrop-blur-md p-6 md:p-12 rounded-3xl md:rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 md:gap-16 items-center"
+          className="bg-[#65A8C7] backdrop-blur-md p-6 md:p-12 rounded-3xl md:rounded-[50px] shadow-2xl border border-white/20 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 md:gap-16 items-center"
         >
-          <div className="space-y-6 text-center lg:text-left">
-            <h1 className="text-5xl md:text-[72px] font-display font-bold leading-[0.85] tracking-tighter text-[#111111]">
-              DAH BUAT<br />
-              <span className="text-kumon-blue">KUMON?</span>
-            </h1>
-            <p className="text-lg md:text-xl text-body-text font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed px-4 md:px-0">
-              KUMON teaches your child how to think, not what to think.
+          <div className="space-y-8 text-center lg:text-left">
+            <div className="space-y-6">
+              <h1 className="text-3xl md:text-5xl font-display font-bold tracking-tight text-white/90">
+                Come learn at
+              </h1>
+              <div className="flex items-center justify-center lg:justify-start gap-4 md:gap-8">
+                <div className="flex items-center justify-center">
+                  <img 
+                    src="https://i.postimg.cc/y6XYM6M2/image.png" 
+                    alt="Kumon Logo" 
+                    className="h-56 md:h-96 w-auto object-contain mix-blend-multiply"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="flex flex-col border-l-4 border-white/30 pl-4 md:pl-8">
+                  <span className="font-display font-black text-3xl md:text-6xl tracking-tight text-white leading-none">
+                    DATARAN SHAHAB
+                  </span>
+                  <span className="font-display font-bold text-[10px] md:text-sm tracking-[0.3em] uppercase text-white/70 mt-2">
+                    KUMON LEARNING CENTRE
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p className="text-lg md:text-xl text-white/90 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed px-4 md:px-0">
+              Empowering children in Alor Setar through the world-renowned Kumon Method. We teach your child how to think, not what to think.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 md:gap-6 pt-6 px-4 md:px-0">
               <button 
                 onClick={() => document.getElementById('form-start')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-kumon-blue text-white px-5 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-2 md:gap-3 shadow-xl shadow-kumon-blue/30 w-full sm:w-auto cursor-pointer text-[13px] md:text-base"
+                className="bg-white text-[#65A8C7] px-5 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-2 md:gap-3 shadow-xl w-full sm:w-auto cursor-pointer text-[13px] md:text-base"
               >
                 <span className="whitespace-nowrap">Book Free Assessment</span> <ArrowRight size={18} className="shrink-0 md:w-5 md:h-5" />
               </button>
               <button 
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-kumon-blue border-2 border-kumon-blue/20 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl shadow-kumon-blue/10 w-full sm:w-auto cursor-pointer text-sm md:text-base"
+                className="bg-transparent text-white border-2 border-white/30 px-6 md:px-10 py-4 md:py-5 rounded-full font-bold uppercase tracking-widest hover:bg-white/10 hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-xl w-full sm:w-auto cursor-pointer text-sm md:text-base"
               >
                 <span className="whitespace-nowrap">Our Method</span>
               </button>
@@ -274,9 +486,9 @@ const AboutKumon = () => {
         >
           <div className="w-full md:w-1/2 flex justify-center">
             <img 
-              src="https://i.postimg.cc/QtKm6m8z/1593966872048787-1.jpg" 
+              src="https://i.postimg.cc/y6XYM6M2/image.png" 
               alt="Kumon Logo" 
-              className="w-full max-w-full md:max-w-[650px] h-auto object-contain rounded-2xl md:rounded-[40px] shadow-2xl"
+              className="w-full max-w-full md:max-w-[500px] h-auto object-contain rounded-2xl md:rounded-[40px] shadow-2xl mix-blend-multiply"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -396,11 +608,11 @@ const Method = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
           <div className="bg-white/90 backdrop-blur-md p-8 md:p-16 rounded-[40px] md:rounded-[60px] shadow-2xl border border-white/20 order-1 lg:order-1">
             <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter mb-6 uppercase">
-              THE 3 <br />
-              <span className="text-kumon-blue">PILLARS.</span>
+              OUR <br />
+              <span className="text-kumon-blue">METHOD.</span>
             </h2>
             <span className="text-kumon-blue font-display font-bold tracking-[0.3em] uppercase text-sm mb-8 block">
-              Kumon's world-class tuition
+              Kumon Dataran Shahab's approach
             </span>
             
             <Accordion 
@@ -1195,9 +1407,9 @@ const Footer = () => {
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-6">
                 <img 
-                  src="https://kumonmalaysia.com/wp-content/themes/kumon/assets/img/logo.png" 
+                  src="https://i.postimg.cc/y6XYM6M2/image.png" 
                   alt="Kumon Logo" 
-                  className="h-6 md:h-8 w-auto object-contain"
+                  className="h-8 md:h-10 w-auto object-contain mix-blend-multiply"
                   referrerPolicy="no-referrer"
                 />
                 <span className="font-display font-bold text-base md:text-lg tracking-tighter uppercase ml-2">
@@ -1275,11 +1487,13 @@ export default function App() {
   return (
     <div className="min-h-screen selection:bg-kumon-blue selection:text-white relative">
       <Navbar />
-      <main className="relative z-10">
+      <main className="relative z-10 pt-[80px] md:pt-[120px]">
         <Hero />
         <AboutKumon />
+        <WhatsNew />
         <Stats />
         <Method />
+        <Pricing />
         <section id="about" className="py-40 bg-transparent">
           <div className="w-full px-6">
             <TeamShowcase />

@@ -224,51 +224,109 @@ export default function TeamShowcase() {
           </AnimatePresence>
         </div>
 
-        {/* Right Side: List */}
-        <div className="w-full lg:w-[350px] space-y-8">
-          <div className="space-y-6">
-            {teachers.map((teacher) => (
-              <div 
-                key={teacher.id}
-                onClick={() => !teacher.isPlaceholder && setHoveredId(teacher.id)}
-                className={cn(
-                  "flex items-center gap-4 transition-all duration-300 cursor-pointer group",
-                  hoveredId === teacher.id ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"
-                )}
+        {/* Right Side: List or Profile Detail */}
+        <div className="w-full lg:w-[400px] min-h-[400px] relative">
+          <AnimatePresence mode="wait">
+            {hoveredId === null ? (
+              <motion.div 
+                key="list"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="space-y-6"
               >
-                <div className={cn(
-                  "w-4 h-2 rounded-full transition-all",
-                  hoveredId === teacher.id ? "bg-kumon-blue w-6" : "bg-gray-400 group-hover:bg-kumon-blue/50"
-                )} />
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className={cn(
-                      "font-display font-bold text-lg transition-colors",
-                      hoveredId === teacher.id ? "text-kumon-blue" : "text-[#111111]"
-                    )}>
-                      {teacher.name}
-                    </h4>
-                    {!teacher.isPlaceholder && <Linkedin size={12} className="text-gray-300" />}
+                <div className="mb-8">
+                  <h3 className="text-xl font-display font-bold text-[#111111] mb-2 uppercase tracking-tight">Our Instructors</h3>
+                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Select a photo to learn more</p>
+                </div>
+                {teachers.map((teacher) => (
+                  <div 
+                    key={teacher.id}
+                    onMouseEnter={() => !isMobile && setHoveredId(teacher.id)}
+                    className={cn(
+                      "flex items-center gap-4 transition-all duration-300 cursor-pointer group",
+                      hoveredId === teacher.id ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"
+                    )}
+                  >
+                    <div className={cn(
+                      "w-4 h-2 rounded-full transition-all",
+                      hoveredId === teacher.id ? "bg-kumon-blue w-6" : "bg-gray-400 group-hover:bg-kumon-blue/50"
+                    )} />
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className={cn(
+                          "font-display font-bold text-lg transition-colors",
+                          hoveredId === teacher.id ? "text-kumon-blue" : "text-[#111111]"
+                        )}>
+                          {teacher.name}
+                        </h4>
+                        {!teacher.isPlaceholder && <Linkedin size={12} className="text-gray-300" />}
+                      </div>
+                      <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        {teacher.role}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                    {teacher.role}
+                ))}
+
+                <a 
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-kumon-blue text-white py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20 mt-12"
+                >
+                  APPLY AS A TEACHER <ArrowRight size={18} />
+                </a>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="profile"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="bg-white rounded-[40px] p-8 shadow-2xl border border-gray-100 h-full flex flex-col"
+              >
+                <button 
+                  onClick={() => setHoveredId(null)}
+                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                >
+                  <X size={20} />
+                </button>
+                
+                <div className="flex-1">
+                  <span className="text-[10px] font-bold text-kumon-blue uppercase tracking-[0.2em] mb-2 block">
+                    {teachers[hoveredId].isPlaceholder ? "CAREER OPPORTUNITY" : "INSTRUCTOR PROFILE"}
+                  </span>
+                  <h3 className="text-3xl font-display font-bold text-[#111111] mb-1">
+                    {teachers[hoveredId].name}
+                  </h3>
+                  <p className="text-[10px] font-bold text-kumon-blue uppercase tracking-widest mb-6">
+                    {teachers[hoveredId].role}
+                  </p>
+                  <div className="h-[1px] bg-gray-100 w-full mb-6" />
+                  <p className="text-lg text-body-text leading-relaxed italic">
+                    {teachers[hoveredId].bio}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
 
-          <a 
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-kumon-blue text-white py-5 rounded-2xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-kumon-blue/90 transition-all shadow-xl shadow-kumon-blue/20 mt-12"
-          >
-            APPLY AS A TEACHER <ArrowRight size={18} />
-          </a>
-          <p className="text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">
-            We're hiring, so drop your resume!
-          </p>
+                {teachers[hoveredId].isPlaceholder && (
+                  <div className="mt-8 pt-8 border-t border-gray-100">
+                    <p className="text-sm font-bold text-kumon-blue uppercase tracking-widest mb-4">
+                      Come teach with us!
+                    </p>
+                    <a 
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-kumon-blue text-white py-4 rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-kumon-blue/90 transition-all shadow-lg"
+                    >
+                      SEND RESUME <ArrowRight size={16} />
+                    </a>
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

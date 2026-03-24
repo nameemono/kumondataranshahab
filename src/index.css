@@ -6,7 +6,7 @@
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
 
-  --color-kumon-blue: #0094da;
+  --color-kumon-blue: #65A8C7;
   --color-kumon-ink: #111111;
   --color-body-text: #4A5568;
 }
@@ -14,7 +14,7 @@
 @layer base {
   body {
     @apply font-sans text-kumon-ink;
-    background-color: #63A9C6;
+    background-color: #65A8C7;
     background-image: url('https://i.postimg.cc/gJHWfS5Z/155652ba3337c4338ade328e7b69b9ed.jpg');
     background-blend-mode: multiply;
     background-attachment: fixed;
